@@ -1,4 +1,9 @@
+using Api;
+using Api.Service;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+
+
 
 internal class Program
 {
@@ -18,6 +23,9 @@ internal class Program
         {
             options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSql"), sql => { });
         });
+
+        builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
+        builder.Services.AddScoped<UserService>();
 
         var app = builder.Build();
        
